@@ -14,6 +14,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CargosController extends AbstractController
 {
+
+    #[Route('/', name: 'home_page')]
+    public function home(): Response
+    {
+        return $this->redirectToRoute('app_cargos');
+    }
+
     #[Route('/cargos', name: 'app_cargos')]
     public function index(CargosEntityRepository $cargosRepository): Response
     {
