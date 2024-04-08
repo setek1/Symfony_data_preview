@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CargosController!{% endblock %}
+
+{% block body %}
+
+
+
+
+    {% if renta %}
+    <h1 class="text-center">Renta de Cargos </h1>
+    <div class="row p-4">
+        <div class="col-md-9">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>ID de cargo</th>
+                        <th>Nombre de Cargo</th>
+                        <th>Renta Bruta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ renta.id }}</td>
+                        <td>{{ renta.cargo_id }}</td>
+                        <td>{{ nCargo.nombre }}</td>
+                        <td>${{ renta.renta_bruta | number_format(0, ',', '.') }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="col-md-3">
+
+                <h1 class="text-center">Buscar Rentas</h1>
+                <form method="post" action="{{path('app_cargos_rentas')}}">
+                    <select name="cargo_id" id="cargo_id" class="form-control">
+                        {% for cargo in cargos %}
+                            <option value="{{ cargo.id }}">{{ cargo.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary mt-2 w-100">Enviar</button>
+                </form>
+                <div class="text-center"><a  href="{{ url('app_cargos') }}">Volver a lista de cargos</a></div>
+                
+                
+            </div>
+        </div>  
+    </div>
+
+    {% else %}
+    <h1 class="text-center">Lista de Cargos </h1>
+
+        <div class="row p-4">
+            <div class="col-md-9">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr class="table-primary">
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Grado</th>
+                            <th>Género</th>
+                            <th>Nacionalidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cargo in cargos %}
+                            <tr>
+                                <td >{{ cargo.id }}</td>
+                                <td>{{ cargo.nombre }}</td>
+                                <td>{{ cargo.grado }}</td>
+                                <td>{{ cargo.genero }}</td>
+                                <td>{{ cargo.nacionalidad }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-3">
+
+                <h1 class="text-center">Buscar Rentas</h1>
+                <form method="post" action="{{path('app_cargos_rentas')}}">
+                    <select name="cargo_id" id="cargo_id" class="form-control">
+                        {% for cargo in cargos %}
+                            <option value="{{ cargo.id }}">{{ cargo.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary mt-2 w-100">Enviar</button>
+                </form>
+                
+            </div>
+           
+        </div>
+    {% endif %}
+   
+
+{% endblock %}
